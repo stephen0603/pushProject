@@ -7,9 +7,11 @@ import {
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -20,6 +22,11 @@ export default function LoginPage() {
     // 如果未來要接 API，可以直接這樣抓欄位數值：
     const email = formData.get("email")
     const password = formData.get("password")
+     const res = await axios.get(
+      "http://localhost:8080/api/health"
+    )
+
+    console.log(res.data)
     console.log("登入資料：", { email, password })
     
     // 💡 這裡放你的登入驗證 API ...
@@ -140,12 +147,12 @@ export default function LoginPage() {
                 />
                 Remember me
               </label>
-              <button
-                type="button"
+              <Link
+                to="/forgotPassword"
                 className="font-medium text-[#5B63E4] hover:underline"
               >
                 Forgot password?
-              </button>
+              </Link>
             </div>
 
             {/* Sign In Button */}
